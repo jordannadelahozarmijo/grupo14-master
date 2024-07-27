@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+
+    
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../scr/index.html">Portafolio</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="../scr/index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../scr/sobremi.html">Sobre mi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../scr/contacto.html">Contacto</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+            
+        <section id="contacto" class="container my-5">
+            
+            <div class="col">
+              <h2 id="caja1" class="text-center">Contacto
+                <i id="icono-info" class="fas fa-info-circle fa-sm"></i>
+              </h2>
+              </div>
+
+              <div id="caja2">
+                  <h6>Horarios de atención</h6>
+                  <p>Lunes a Viernes desde las 15:00 hrs</p>
+              </div>
+
+            <!-- Formulario de Contacto -->
+            <form id="contactForm" novalidate>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" required placeholder="Ingresar nombre">
+                    <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" required placeholder="Ingresar email">
+                    <div class="invalid-feedback">Por favor ingresa un email válido.</div>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" rows="3" required placeholder="Ingresar mensaje"></textarea>
+                    <div class="invalid-feedback">Por favor ingresa un mensaje.</div>
+                </div>
+                <button id="buttonSend" type="submit" class="btn btn-dark mt-2">Enviar</button>
+            </form>
+        </section>
+        
+        
+        <!-- Inicio JumboTron-->
+        <div class="jumbotron">
+          <div class="row">
+            <div class="col-lg-3 col-sm-12 col-md-3" id="">
+              <img id="lateralDesign" src="../assets/img/lateraldesign.png" alt="">
+            </div>
+            <div class="col-lg-9 col-sm-12 col-md-12" id="content-jumbo">
+              <p class="display-6">Diseño Gráfico, UX/UI</p>
+              <p class="lead">Transformando experiencias digitales con diseño intuitivo y centrado en el usuario.</p>
+              <p>Explora mis proyectos y descubre cómo mejoro la interacción del usuario con interfaces elegantes y funcionales.</p>
+              <a class="btn btn-outline-dark btn-sm" href="index.html" role="button">Ver Proyectos</a>
+            </div>
+          </div>
+         
+        </div>
+      
+
+    <!--Inicio del Script-->
+
+    
+    <script src="../assets/js/jquery-3.7.1.slim.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+#header {
+    background-color: rgb(84, 33, 214);
+    color: white;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+
+#contenidoImagenes, #caja2, #habilidades{
+    text-align: center;
+}
+
+#imagenPerfil_1, #imagenPerfil_2, #imagenPerfil_3 {
+    width: 300px;
+    text-align: center;
+}
+
+#icono-info, #caja2 {
+    color: var(--bs-purple);
+}
+
+.jumbotron {
+    background-color: rgb(222, 211, 241);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+}
+
+#content-jumbo{
+    text-align: start;
+}
+
+#lateralDesign {
+    width: 200px;
+    text-align: start;
+}
+
+.interesPersonal{
+    color: rgb(230, 110, 80);
+}
+
+#miElemento_1, #miElemento_2, #miElemento_3, #miElemento_4, #miElemento_5, #miElemento_6 {
+    text-align: center;
+    width: 500px; 
+    height: 50px;
+}
+
+#habilidades {
+    text-align: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}

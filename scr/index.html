@@ -5,83 +5,182 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio Personal</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 </head>
 <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../scr/index.html">Portafolio</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../scr/index.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../scr/sobremi.html">Sobre mi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../scr/contacto.html">Contacto</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    
     <!-- Información Personal -->
-    <header class="bg-primary text-white text-center py-5">
-        <h1>Tu Nombre</h1>
-        <p class="lead">Breve descripción sobre ti.</p>
+    <header class="" id="header">
+        <h1>Jordanna De La Hoz</h1>
+        <p class="lead">Diseñadora Integral</p>
     </header>
 
     <!-- Habilidades -->
-    <section id="habilidades" class="container my-5">
-        <h2 class="text-center">Habilidades</h2>
-        <ul class="list-group">
-            <li class="list-group-item">Habilidad 1</li>
-            <li class="list-group-item">Habilidad 2</li>
-            <li class="list-group-item">Habilidad 3</li>
-        </ul>
-    </section>
+    <div id="habilidades" class="mt-5">
+            <h2>Habilidades</h2>
+        
+                <div class="row mt-4">
+                        <div class="col-md-2 col-sm-12" id="miElemento_1">
+                            <p class="list-group-item">UX/UI</p>
+                        </div>
+                        <div class="col-md-2 col-sm-12" id="miElemento_2">
+                            <p class="list-group-item">Branding</p>
+                        </div>
+                        <div class="col-md-2 col-sm-12" id="miElemento_3">
+                            <p class="list-group-item">Páginas webs</p>
+                        </div>
+                        <div class="col-md-2 col-sm-12" id="miElemento_4">
+                            <p class="list-group-item">Industrial</p>
+                        </div>
+                        <div class="col-md-2 col-sm-12" id="miElemento_5">
+                            <p class="list-group-item">Servicios</p>
+                        </div>
+                        <div class="col-md-2 col-sm-12" id="miElemento_6">
+                            <p class="list-group-item">Industrial</p>
+                        </div>
+                        
+                </div>
+        
+            </div>
 
     <!-- Proyectos -->
     <section id="proyectos" class="container my-5">
-        <h2 class="text-center">Proyectos</h2>
+        <h2 class="text-center mb-5">Proyectos</h2>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card mb-4">
-                    <img src="img/proyecto1.jpg" class="card-img-top" alt="Proyecto 1">
+                    <img src="../assets/img/proyecto1_4.png" class="card-img-top" alt="Proyecto 1">
                     <div class="card-body">
-                        <h5 class="card-title">Proyecto 1</h5>
-                        <p class="card-text">Descripción del proyecto 1.</p>
+                        <h5 class="card-title">Space: Página web</h5>
+                        <p class="card-text">Mockup disponible con Figma</p>
+                        <!--Botón modal proyecto 1-->
+                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalProyecto1">
+                            Ver más
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card mb-4">
-                    <img src="img/proyecto2.jpg" class="card-img-top" alt="Proyecto 2">
+                    <img src="../assets/img/proyecto2_2.jpeg" class="card-img-top" alt="Proyecto 2">
                     <div class="card-body">
-                        <h5 class="card-title">Proyecto 2</h5>
-                        <p class="card-text">Descripción del proyecto 2.</p>
+                        <h5 class="card-title">Packaging</h5>
+                        <p class="card-text">Reconceptualización de empaque para huevos</p>
+                        <!--Botón modal proyecto 2-->
+                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalProyecto2">
+                            Ver más
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card mb-4">
-                    <img src="img/proyecto3.jpg" class="card-img-top" alt="Proyecto 3">
+                    <img src="../assets/img/proyecto3_3.png" class="card-img-top" alt="Proyecto 3">
                     <div class="card-body">
-                        <h5 class="card-title">Proyecto 3</h5>
-                        <p class="card-text">Descripción del proyecto 3.</p>
+                        <h5 class="card-title">Manual de estilo</h5>
+                        <p class="card-text">Material no disponible, marca en proceso de patente</p>
+                        <!--Botón modal proyecto 3-->
+                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalProyecto3">
+                            Ver más
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Formulario de Contacto -->
-    <section id="contacto" class="container my-5">
-        <h2 class="text-center">Contacto</h2>
-        <form id="contactForm" novalidate>
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" required>
-                <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+    <!-- Modal Proyecto 1 -->
+    <div class="modal fade" id="modalProyecto1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Space: página web</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" required>
-                <div class="invalid-feedback">Por favor ingresa un email válido.</div>
+            <div class="modal-body">
+                <p class="mb-2">El proyecto se centra en la búsqueda y diseño de un ecommerce que contenta el nuevo método de pago llamado <strong>"Compre ahora, Pague después" o "Buy me now and pay later". </strong> Donde  el objetivo principal era presentar el método de pago a  los usuarios, proporcionando una experiencia clara y conveniente para los usuarios.
+                </p>
+                
+                <a href="https://www.figma.com/proto/2ejfqZVANud2NbVnCAenLO/Space-Ecommerce?embed_host=share&kind=proto&node-id=2-5&page-id=2%3A3&scaling=scale-down&show-proto-sidebar=1&starting-point-node-id=2%3A5&t=UxFJJcYRoB18WPFB-1&type=design">Revisar mockup en Figma</a>
             </div>
-            <div class="form-group">
-                <label for="mensaje">Mensaje</label>
-                <textarea class="form-control" id="mensaje" rows="3" required></textarea>
-                <div class="invalid-feedback">Por favor ingresa un mensaje.</div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
-    </section>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Modal Proyecto 2 -->
+    <div class="modal fade" id="modalProyecto2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Packaging</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Marca y packaging de mi propia autoria, reflejan una reconceptualización de los empaques de huevo.
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
-    <script src="../assets/js/jquery-3.7.1.slim.min.js"></script>
+    <!-- Modal Proyecto 3 -->
+    <div class="modal fade" id="modalProyecto3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Manual de estilo</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Material gráfico realizado para los siguientes elementos:
+                <!--Listado no ordenado-->
+                <ul>
+                    <li>Página web</li>
+                    <li>Vestuario: ropa, gorro y detantal</li>
+                    <li>Stickers</li>
+                    <li>Manual de estilo</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
 </body>
