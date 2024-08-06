@@ -1,4 +1,6 @@
 
+//-----Ejercicio 2 -----------------------------------------
+
 // Aplicar método REPLACE
 let str = `Hazlo funcionar, hazlo bien, hazlo rápido`;
 
@@ -52,6 +54,9 @@ const resultadoEnd = str3.trimEnd();
 console.log({ str3 });
 console.log({ resultadoEnd });
 
+
+
+
 //-----Ejercicio 2 -----------------------------------------
 
 //Separador numérico 
@@ -96,7 +101,7 @@ saludo ||= 'Lorem ipsum dolor sit amet'
 console.log(saludo);
 
 
-// Y &&=
+// AND &&=
 let persona = {
     nombre: 'Alejando',
     apellido: 'Minor',
