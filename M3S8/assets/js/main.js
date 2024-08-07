@@ -21,63 +21,61 @@ correcto funcionamiento de la lógica.
 
 //leemos el formulario
 
-const primerNombre = '';
-const ApellidoPaterno = '';
-const email = '';
-const edadPersona = '';
-const fechaNacimiento = '';
-
 
 document.getElementById('formularioReservaciones').addEventListener('submit', function(event) {
+
     event.preventDefault();
 
-    // Clear previous errors
-    document.querySelectorAll('.error').forEach(function(errorElement) {
-        errorElement.textContent = '';
-    });
+    const primerNombre = document.getElementById('nombrePersona').value.trim();
+    const apellidoPaterno = document.getElementById('apellidoPersona').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const edadPersona = parseInt(document.getElementById('edadPersona').value.trim(), 10);
+    const fechaNacimiento = document.getElementById('fechaNacimiento').value.trim();
 
-    // Validate form
-    let formularioValidoBooleano = true;
+    let reserva = {
+        primerNombre: primerNombre,
+        apellidoPaterno: apellidoPaterno,
+        email: email,
+        edadPersona: parseInt(edadPersona, 10),
+        fechaNacimiento: fechaNacimiento
+    };
 
-    primerNombre = document.getElementById('nombrePersona').value.trim();
-    ApellidoPaterno = document.getElementById('apellidoPersona').value.trim();
-    email = document.getElementById('email').value.trim();
-    edadPersona = document.getElementById('edadPersona').value.trim();
-    fechaNacimiento = document.getElementById('fechaNacimiento').value.trim();
+    let validador = {
+        set: function(obj, propiedad, valor) {
+            if (propiedad === 'edadPersona') {
+                if (typeof valor !== 'number' || Number.isNaN(valor)) {
+                    console.log('Edad debe ser un número');
+                    return false;
+                }
+                if (valor < 0) {
+                    console.log('Edad debe ser un número positivo');
+                    return false;
+                }
+                if (valor < 18) {
+                    alert('Debes ser mayor de edad para crear una reservación');
+                    return false;
+                }
+            }
+            obj[propiedad] = valor;
+            return true;
+        }
+    };
 
-    /*
-    if (!primerNombre) {
-        document.getElementById('nombrePersonaError').textContent = 'El nombre es requerido.';
-        formularioValidoBooleano = false;
-    }
-    if (!ApellidoPaterno) {
-        document.getElementById('apellidoPersonaError').textContent = 'El apellido es requerido.';
-        formularioValidoBooleano = false;
-    }
-    if (!email) {
-        document.getElementById('emailError').textContent = 'El correo electrónico es requerido.';
-        formularioValidoBooleano = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-        document.getElementById('emailError').textContent = 'El correo electrónico no es válido.';
-        formularioValidoBooleano = false;
-    }
-    if (!edadPersona || edadPersona <= 0) {
-        document.getElementById('edadPersonaError').textContent = 'La edad debe ser un número positivo.';
-        formularioValidoBooleano = false;
-    }
-    if (!fechaNacimiento) {
-        document.getElementById('fechaNacimientoError').textContent = 'La fecha es requerida.';
-        formularioValidoBooleano = false;
+    // Crear el proxy
+    let reservaProxy = new Proxy(reserva, validador);
+    console.log("paso el validador");
+    // Asignar los valores usando el proxy
+    let formularioValido = true;
+
+    if (!validador.set(reservaProxy, 'edadPersona', edadPersona)) {
+        formularioValido = false;
     }
 
-    // Submit form if valid
-    if (formularioValidoBooleano) {
+    if (formularioValido) {
         alert('Formulario enviado con éxito.');
-
-        //  this.submit();  
+        // Aquí puedes enviar el formulario o realizar otras acciones necesarias
+        console.log(reserva);
+    } else {
+        console.log('No se pudo enviar el formulario debido a errores de validación.');
     }
-    */
-
 });
-
-console.log(primerNombre);
