@@ -1,37 +1,19 @@
 
-.padre {
+.main content {
     text-align: center; 
    }
    
- .hijo-inline-block {
-     background-color: rgb(84, 177, 75);
-     padding: 10px;
-     margin: 10px;
-     display: inline-block;
-   }
+.feature{
+    background-color: rgb(84, 177, 75);
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+}
  
-   .hijo-inline {
-    text-align: left; 
-     background-color: rgb(255, 255, 255);
-     padding: 10px;
-     margin: 10px;
-     display: inline;
-   }
- 
-   .hijo-block {
-     background-color: rgb(84, 177, 75);
-     padding: 10px;
-     margin: 10px;
-     display: block;
- 
-     width: 100px;
-     height: 100px;
-     padding: 5px;
-     border: 1px solid blue;
-   }
+.form-container {
+  
+}
 
+.form-group {
 
-
-   .card-deck {
-    margin: 20px;
 }
