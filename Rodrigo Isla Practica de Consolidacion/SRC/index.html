@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .product {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Carrito de Compras</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Productos Disponibles</h2>
+                <ul id="product-list" class="list-group">
+                    <!-- Productos serán añadidos aquí -->
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h2>Carrito</h2>
+                <ul id="cart-list" class="list-group">
+                    <!-- Productos en el carrito serán añadidos aqí -->
+                </ul>
+                <h3>Total: $<span id="total">0.00</span></h3>
+                <button id="finalize" class="btn btn-primary">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../Assets/js/jquery-3.7.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../Assets/js/script.js"></script>
+</body>
+</html>
