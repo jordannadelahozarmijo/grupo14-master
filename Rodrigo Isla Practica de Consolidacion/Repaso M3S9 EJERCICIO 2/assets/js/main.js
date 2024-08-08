@@ -37,7 +37,7 @@ var manejadorJugador = {
         return target[prop];
     }
 };
-// Función para agregar un jugador
+// Función para agregar un jugadorrrr
 function agregarJugador() {
 
     for (let i = 0; i < 2; i++) {
