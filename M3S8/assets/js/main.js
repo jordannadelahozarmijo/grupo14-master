@@ -11,16 +11,16 @@ document.getElementById('formulario').addEventListener('submit', function(event)
     const edad = parseInt(document.getElementById('edad').value.trim(), 10);
     const fecha = document.getElementById('fecha').value.trim();
 
-    //Crear objeto
+    //Crea objeto
     let reserva = {
         nombre: nombre,
         apellido: apellido,
         email: email,
         edad: edad,
-        fechao: fecha
+        fecha: fecha,
     };
 
-    //Crear set: validador dentro del formulario
+    //Crea set: validador dentro del formulario
     let validador = {
         set: function(objeto, propiedad, valor) {
             if (propiedad === 'edad') {
@@ -37,29 +37,37 @@ document.getElementById('formulario').addEventListener('submit', function(event)
                     return false;
                 }
             }
+            //Definimos el valor asociado a la propiedad que estamos tratando de interceptar dentro del objeto
             objeto[propiedad] = valor;
             return true;
         }
     };
 
-    // Crear el proxy
+    // Crear el proxy: target y handler
     let reservaProxy = new Proxy(reserva, validador);
     console.log("Validador funciona");
     
     // Asignar los valores usando el proxy
+    // Ayuda a rastrear el estado de validación del formulario
     let formularioValido = true; 
 
     // Mostrar los resultados
-        if (!validador.set(reservaProxy, 'edad', edad)) {
-            formularioValido = false;
-        }
+    if (!validador.set(reservaProxy, 'edad', edad)) {
+        formularioValido = false;
+        alert('Formulario no enviado, edad inválida');
+    }
 
-        if (formularioValido) {
-            alert('Formulario enviado con éxito.');
-            console.log(reserva);
-            console.log('Formulario enviado con éxito');
-        } else {
-            console.log('No se pudo enviar el formulario debido a errores de validación.');
-        }
+    if (formularioValido) {
+        alert('Formulario enviado con éxito.');
+        console.log(reserva);
+        console.log('Formulario enviado con éxito');
+            
+        // Limpia el formulario
+        document.getElementById('formulario').reset();
+    } 
     
+    else {
+        console.log('No se pudo enviar el formulario debido a errores de validación.');
+    }
+
 });
