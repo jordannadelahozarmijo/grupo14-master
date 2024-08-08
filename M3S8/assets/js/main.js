@@ -11,7 +11,7 @@ document.getElementById('formulario').addEventListener('submit', function(event)
     const edad = parseInt(document.getElementById('edad').value.trim(), 10);
     const fecha = document.getElementById('fecha').value.trim();
 
-    //Crea objeto
+    //Crear objeto
     let reserva = {
         nombre: nombre,
         apellido: apellido,
@@ -20,7 +20,7 @@ document.getElementById('formulario').addEventListener('submit', function(event)
         fecha: fecha,
     };
 
-    //Crea set: validador dentro del formulario
+    //Crear set: validador dentro del formulario
     let validador = {
         set: function(objeto, propiedad, valor) {
             if (propiedad === 'edad') {
