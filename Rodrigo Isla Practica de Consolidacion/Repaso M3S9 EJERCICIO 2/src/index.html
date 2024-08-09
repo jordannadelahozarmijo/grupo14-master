@@ -13,13 +13,38 @@
 </head>
 
 <body>
-<h1>ADIVINA EL NUMERO</h1>
+
     <div class="container">
-        <div class="col mt-4">
-            <button id="btnAgregarJugador" class="btn btn-primary" onclick="agregarJugador()">Agregar Jugador</button>
-            <button id="btngenerarNumeroAleatorio" class="btn btn-primary" onclick="generarNumeroAleatorio()">Comenzar Juego</button>
-            <button id="btnAdivinarNumero" class="btn btn-primary" onclick="adivinarNumero()">Adivinar Número</button>
+        <div class="col">
+            <h1>Juega a adivinar el número</h1>
         </div>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">1. Ingresar</h5>
+              <p class="card-text">Agrega a jugadores para iniciar el juego</p>
+              <button id="btnAgregarJugador" class="btn btn-warning" onclick="agregarJugador()">Agregar jugador</button>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">2. Adivinar</h5>
+              <p class="card-text">Ingresen un número por cada jugador y vean el resultado.</p>
+              <button id="btnAdivinarNumero" class="btn btn-warning" onclick="adivinarNumero()">Adivinar número</button>
+            </div>
+        </div>
+        <div id="card-2" class="row mt-5" style="width: 40rem;">
+            <div class="col">
+                <h4>Resultados</h4>
+                <h6 id="resultado"></h6>
+                <div id="jugadores-info"></div>
+            </div>
+            
+        </div>
+        
+            <!--
+            <button id="btngenerarNumeroAleatorio" class="btn btn-primary" onclick="generarNumeroAleatorio()">Comenzar Juego</button>-->
+            
     </div>
 
     <!-- Scripts, Bootstrap y jQuery -->

@@ -71,12 +71,25 @@ console.log(numeroRandom());
 function adivinarNumero(numeroAleatorio) {
     //Función para Adivinar el numero
     var numeroAleatorio = numeroRandom();
+
+    // Mostrar el número aleatorio en el párrafo con id "resultado"
+    document.getElementById('resultado').textContent = "El número aleatorio es: " + numeroAleatorio;
+
+    // Limpiar la información previa de jugadores
+    var jugadoresInfo = document.getElementById('jugadores-info');
+    jugadoresInfo.innerHTML = "";
+
     // Solicitar la adivinanza a cada jugador
     jugadores.forEach(jugador => {
         const adivinanza = parseInt(prompt(`${jugador.nombre}, ingrese su adivinanza:`), 10);
         jugador.adivinanza = adivinanza;
         console.log("jugador");
         console.log(jugador);
+
+        // Crear un nuevo párrafo para mostrar la información del jugador
+        var jugadorInfo = document.createElement('p');
+        jugadorInfo.textContent = `${jugador.nombre} ingresó el número: ${jugador.adivinanza}`;
+        jugadoresInfo.appendChild(jugadorInfo);
 
     });
     //validar qeu existan a lo menos 2 jugadores antes de ejecutar este bloque
@@ -112,11 +125,5 @@ function adivinarNumero(numeroAleatorio) {
 
     }
 }
-
-
-//Validación y Manejo de Jugadores con Proxy
-
-
-//Mostrar Resultados
 
 
