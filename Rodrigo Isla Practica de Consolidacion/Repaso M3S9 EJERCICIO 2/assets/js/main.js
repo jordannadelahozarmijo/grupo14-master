@@ -19,7 +19,7 @@ var manejadorJugador = {
         if (prop === 'nombre') {
             if (typeof value === 'string' && value.trim().length > 0) {
                 target[prop] = value.trim();
-                console.log('nombre Valido');
+                console.log('nombre Válido');
             } else {
                 console.log('Nombre inválido');
                 return false; // Prevenir la asignación de un nombre inválido
@@ -37,7 +37,7 @@ var manejadorJugador = {
         return target[prop];
     }
 };
-// Función para agregar un jugadorrrr
+// Función para agregar un jugador
 function agregarJugador() {
 
     for (let i = 0; i < 2; i++) {
