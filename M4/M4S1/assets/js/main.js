@@ -3,7 +3,7 @@
 document.getElementById('formulario').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Expresión regular para validar formato email
+    // Expresión regular para utilizar en la validación del formato email
     const simbolos = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Función para validar email
