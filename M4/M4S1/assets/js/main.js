@@ -36,20 +36,20 @@ document.getElementById('formulario').addEventListener('submit', function(event)
     };
 
     // Crear el proxy: target y handler
-    let Proxy = new Proxy(contacto, validador);
+    let proxy = new Proxy(contacto, validador);
 
     // Recoger valores del formulario para cumplir las condiciones y mostrar el alert
-    Proxy.nombre = document.getElementById('nombre').value.trim();
-    Proxy.apellido = document.getElementById('apellido').value.trim();
-    Proxy.email = document.getElementById('email').value.trim();
-    Proxy.motivo = document.getElementById('motivo').value.trim();
-    Proxy.mensaje = document.getElementById('mensaje').value.trim();
+    proxy.nombre = document.getElementById('nombre').value.trim();
+    proxy.apellido = document.getElementById('apellido').value.trim();
+    proxy.email = document.getElementById('email').value.trim();
+    proxy.motivo = document.getElementById('motivo').value.trim();
+    proxy.mensaje = document.getElementById('mensaje').value.trim();
     
 
     // Keys ayuda a verificar si el objeto contacto tiene todos los valores, de ser así entonces el formulario es válido
     if (Object.keys(contacto).length === 5) {
 
-        alert(`DE: ${Proxy.nombre} (${Proxy.email}) \n - ASUNTO: ${Proxy.motivo} \n -MENSAJE: \n ${Proxy.mensaje}`);
+        alert(`DE: ${proxy.nombre} (${proxy.email}) \n - ASUNTO: ${proxy.motivo} \n -MENSAJE: \n ${proxy.mensaje}`);
         console.log('Formulario enviado con éxito'); 
 
         // Limpia el formulario
