@@ -9,7 +9,7 @@ document.getElementById('formulario').addEventListener('submit', function(event)
     // Función para validar email
     const validarEmail = email => simbolos.test(email);
 
-    // Crear clase vacío para contacto
+    // Crear clase vacía para contacto
     var contacto = {};
 
     // Crear set: validador dentro del formulario
