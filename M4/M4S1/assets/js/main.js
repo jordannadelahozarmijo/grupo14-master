@@ -1,12 +1,12 @@
 //Formulario
 
-document.getElementById('formulario').addEventListener('submit', function(event) {
+document.getElementById('formulario').addEventListener('submit', (event) => {
     event.preventDefault();
 
     // Expresión regular para utilizar en la validación del formato email
     const simbolos = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Función para validar email
+    // Función para validar si el email cumple con el patrón definido por una expresión regular 
     const validarEmail = email => simbolos.test(email);
 
     // Crear clase vacía para contacto
