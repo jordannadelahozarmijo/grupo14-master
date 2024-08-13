@@ -1,81 +1,61 @@
-//Evaluación modulo 4 sesión 1
-/*document.getElementById('formulario').addEventListener('submit', function(event) {
+//Formulario
 
-    event.preventDefault();
-
-    //Definir las constantes utilizando los ID del formulario
-    const nombre = document.getElementById('nombre').value.trim();
-    const apellido = document.getElementById('apellido').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const motivo = document.getElementById('motivo').value.trim();
-    const mensaje = document.getElementById('mensaje').value.trim();
-
-    // Ayuda a rastrear el estado de validación del formulario
-    let formularioValido = true; 
-
-    if (formularioValido) {
-        alert(`DE: ${nombre} (${email}) \n - ASUNTO: ${motivo} \n -MENSAJE: \n ${mensaje}`);
-        console.log('Formulario enviado con éxito');
-            
-        // Limpia el formulario
-        document.getElementById('formulario').reset();
-    } 
-    else {
-        console.log('No se pudo enviar el formulario debido a errores de validación.');
-    }
-
-});*/
 document.getElementById('formulario').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Crear objeto vacío para la contacto
-    let contacto = {};
+    // Expresión regular para validar formato email
+    const simbolos = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Función para validar email
+    const validarEmail = email => simbolos.test(email);
+
+    // Crear clase vacío para contacto
+    var contacto = {};
 
     // Crear set: validador dentro del formulario
     let validador = {
-        set: function(objeto, propiedad, valor) {
-            if (propiedad === 'email') {
-                const emailValido = validarEmail(valor);
-                if (!emailValido) {
-                    console.log('El correo electrónico no es válido');
-                    return false;
-                }
-            } else if (['nombre', 'apellido', 'motivo', 'mensaje'].includes(propiedad)) {
-                if (valor.trim() === '') {
-                    console.log(`${propiedad} es obligatorio`);
-                    return false;
-                }
+        set: (objeto, propiedad, valor) => {
+            //Constantes de las propiedades utilizadas en el formulario
+            const campoEmail = propiedad === 'email';
+            const camposObligatorios = ['nombre', 'apellido', 'motivo', 'mensaje'].includes(propiedad);
+    
+            if (campoEmail && !validarEmail(valor)) {
+                console.log('El correo electrónico no es válido');
+                return false;
             }
-            // Definir el valor asociado a la propiedad
+            
+            if (camposObligatorios && valor.trim() === '') {
+                console.log(`${propiedad} es obligatorio`);
+                return false;
+            }
+    
+            // asignar valores al objeto
             objeto[propiedad] = valor;
             return true;
         }
     };
 
     // Crear el proxy: target y handler
-    let contactoProxy = new Proxy(contacto, validador);
+    let Proxy = new Proxy(contacto, validador);
 
-    // Recoger valores del formulario
-    contactoProxy.nombre = document.getElementById('nombre').value.trim();
-    contactoProxy.apellido = document.getElementById('apellido').value.trim();
-    contactoProxy.email = document.getElementById('email').value.trim();
-    contactoProxy.motivo = document.getElementById('motivo').value.trim();
-    contactoProxy.mensaje = document.getElementById('mensaje').value.trim();
+    // Recoger valores del formulario para cumplir las condiciones y mostrar el alert
+    Proxy.nombre = document.getElementById('nombre').value.trim();
+    Proxy.apellido = document.getElementById('apellido').value.trim();
+    Proxy.email = document.getElementById('email').value.trim();
+    Proxy.motivo = document.getElementById('motivo').value.trim();
+    Proxy.mensaje = document.getElementById('mensaje').value.trim();
+    
 
-    // Si el objeto contacto tiene todos los valores, entonces el formulario es válido
+    // Keys ayuda a verificar si el objeto contacto tiene todos los valores, de ser así entonces el formulario es válido
     if (Object.keys(contacto).length === 5) {
-        alert(`DE: ${contactoProxy.nombre} (${contactoProxy.email}) \n - ASUNTO: ${contactoProxy.motivo} \n -MENSAJE: \n ${contactoProxy.mensaje}`);
-        console.log('Formulario enviado con éxito');
-        
+
+        alert(`DE: ${Proxy.nombre} (${Proxy.email}) \n - ASUNTO: ${Proxy.motivo} \n -MENSAJE: \n ${Proxy.mensaje}`);
+        console.log('Formulario enviado con éxito'); 
+
         // Limpia el formulario
         document.getElementById('formulario').reset();
-    } else {
+    } 
+    else {
         console.log('No se pudo enviar el formulario debido a errores de validación.');
     }
 });
-
-// Función para validar formato de email
-function validarEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
