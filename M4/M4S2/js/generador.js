@@ -3,8 +3,9 @@ let frutas = ['manzana', 'naranja', 'pera', 'frutilla', 'kiwi'];
 
 //Crear generador
 function* generador() {
+    //iterador
     let i = 0
-    //Palabra clave yield: pone la función en pausa.
+    //yield pone la función en pausa.
     yield frutas[i];
     i++
     yield frutas[i];
@@ -15,7 +16,7 @@ function* generador() {
     i++
     yield frutas[i];
     i++
-    return 'terminado...';
+    return 'Termina de iterar';
 }
 
 
