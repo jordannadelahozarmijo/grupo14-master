@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,8 +14,74 @@
         <!--Jumbotron-->
 
         <!--Contenido-->
-            <!--Utilizar radio button-->
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <!--Primera Col-->
+                <div class="col">
+                    <div id="title">
+                        <h1>MEJORA TU PIZZA</h1>
 
+                        <P>Puede elegir 3 ingredientes gratis. cada ingrediente adicional cuesta $800 pesos cada uno.</P>
+                        <p>Los ingredientes seleccionados son:</p>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Carne" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Carne</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Pollo" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">Pollo</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Tocino" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Tocino</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Mozarella" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">Mozarella</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Champiñón" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Champiñón</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Cebolla" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">Cebolla</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Piña" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">Piña</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Pimentón" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">Pimentón</label>
+                        </div>
+                    </div>
+
+                    <p>Los ingredientes seleccionados son:</p>
+                    <span id="ingredientes_seleccionados"></span>
+
+                    <p>Los ingredientes extras seleccionados son:</p>
+                    <span id="ingredientes_extras"></span>
+
+                </div>
+                <!--Segunda Col-->
+                <div class="col">
+                    <div id="title">
+                        <h1>RESUMEN DEL PEDIDO</h1>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><p class="izq">Pizza XL</p> <p class="der"><strong>$15.000</strong></p></li>
+                        <li class="list-group-item"><p class="izq">Ingredientes Extras</p> <span class="der"><strong>$15.000</strong></span></li>
+                        <li class="list-group-item"><p class="izq">Propina</p> <span class="der"><strong>$15.000</strong></span></li>
+                    </ul>
+                    <div class="row">
+                        <input type="number"> 
+                        <button>Enviar Pedido con Propina</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="module" src="../M4S3/js/main.js"></script>
