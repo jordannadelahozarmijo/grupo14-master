@@ -9,17 +9,26 @@
 <body>
 
     <!--Navbar-->
-
+    <nav class="navbar navbar-light bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="">
+            <img src="../assets/img/white.png" alt="Logo Super Dooper" width="200" height="48" class="d-inline-block align-text-top">
+          </a>
+        </div>
+    </nav>
     <div class="container">
         <!--Jumbotron-->
-
+        <div class="mt-4 p-5 bg-danger text-white rounded">
+            <h1>Pizzeria</h1>
+            <p>Arma tu pizza a tu gusto</p>
+          </div>
         <!--Contenido-->
-        <div class="container text-center">
+        <div class="container text-center mt-3">
             <div class="row align-items-start">
                 <!--Primera Col-->
-                <div class="col">
-                    <div id="title">
-                        <h1>MEJORA TU PIZZA</h1>
+                <div class="col-12 col-md-6">
+                    <div>
+                        <h3 id="title">MEJORA TU PIZZA</h3>
 
                         <P>Puede elegir 3 ingredientes gratis. cada ingrediente adicional cuesta $800 pesos cada uno.</P>
                         <p>Los ingredientes seleccionados son:</p>
@@ -66,18 +75,18 @@
 
                 </div>
                 <!--Segunda Col-->
-                <div class="col">
-                    <div id="title">
-                        <h1>RESUMEN DEL PEDIDO</h1>
+                <div class="col-12 col-md-6">
+                    <div id="title2">
+                        <h4>RESUMEN DEL PEDIDO</h4>
                     </div>
                     <ul class="list-group">
                         <li class="list-group-item"><p class="izq">Pizza XL</p> <p class="der"><strong>$15.000</strong></p></li>
-                        <li class="list-group-item"><p class="izq">Ingredientes Extras</p> <span class="der"><strong>$15.000</strong></span></li>
-                        <li class="list-group-item"><p class="izq">Propina</p> <span class="der"><strong>$15.000</strong></span></li>
+                        <li class="list-group-item"><p class="izq">Ingredientes Extras</p> <p class="der"><strong>$15.000</strong></p></li>
+                        <li class="list-group-item"><p class="izq">Propina</p> <p class="der"><strong>$15.000</strong></p></li>
                     </ul>
-                    <div class="row">
-                        <input type="number"> 
-                        <button>Enviar Pedido con Propina</button>
+                    <div class="row" id="input-gru">
+                        <input class="input-group-text" type="number"> 
+                        <button class="btn btn-dark">Enviar Pedido con Propina</button>
                     </div>
                 </div>
             </div>
