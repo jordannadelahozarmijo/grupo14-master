@@ -24,18 +24,22 @@ class Pizza extends Pedido {
     calcularExtras() {
         // Si hay más de 3 ingredientes seleccionados, los extras cuestan 800 cada uno
         const extraCount = this.ingredientes.length > 3 ? this.ingredientes.length - 3 : 0;
-        return extraCount * 800;
+        console.log(extraCount);
+        return extraCount*800;
+
     }
 
     calcularTotal() {
-        const extras = this.calcularExtras();
-        this.total = this.precio + extras
+        let extras = this.calcularExtras();
+        this.total = this.precio + extras;
+        console.log(this.calcularExtras());
         return this.total + this.propina;
     }
 
     describir() {
-        const extras = this.calcularExtras();
-        const total = this.calcularTotal();
+        let extras = this.calcularExtras();
+        let total = this.calcularTotal();
+        console.log(extras);
         return `
         Precio pizza XL: ${this.precio}
         Ingredientes Extras: ${extras}
@@ -45,7 +49,8 @@ class Pizza extends Pedido {
 }
 
 //Parte 2 Resumen del pedido
-// Función para actualizar el resumen del pedido
+
+/* // Función para actualizar el resumen del pedido
 function actualizarResumen() {
     //Utilizar valor de ingredientes extras
     const ingredientesSeleccionados = [];
@@ -69,19 +74,68 @@ function actualizarResumen() {
     totalElementos[0].querySelector('.der').innerText = `$${pizza.precio}`;
     totalElementos[1].querySelector('.der').innerText = `$${pizza.calcularExtras()}`;
     totalElementos[2].querySelector('.der').innerText = `$${pizza.propina}`;
+
+
 }
 
 // Manejar evento de ingresar propina
 document.querySelector('.btn-dark').addEventListener('click', function () {
     const propinaInput = document.querySelector('.input-group-text').value;
-     //utilizar el valor por defecto 1000 al seleccionar el input de propinas
+    //utilizar el valor por defecto 1000 al seleccionar el input de propinas
     const propina = propinaInput ? parseInt(propinaInput) : 1000;
-   
+
     //utilizar el valor por defecto en PIZZA XL
-    const pizza = new Pizza(0, propina, 15000, []);
     pizza.calcularTotal();
 
     //Enviar alert de Propina enviada / Propina no enviada
+    alert(`Pedido enviado. ${pizza.describir()}`);
+}); */
+
+// Declarar la pizza fuera de las funciones para que sea accesible globalmente
+let pizza;
+
+// Función para actualizar el resumen del pedido
+function actualizarResumen() {
+    // Utilizar valor de ingredientes extras
+    const ingredientesSeleccionados = [];
+    const checkboxes = document.querySelectorAll('.form-check-input');
+
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            ingredientesSeleccionados.push(checkbox.value);
+        }
+    });
+
+    // Si la pizza ya está creada, actualizar sus propiedades, de lo contrario, crear una nueva
+    if (pizza) {
+        pizza.ingredientes = ingredientesSeleccionados;
+    } else {
+        pizza = new Pizza(0, 1000, 15000, ingredientesSeleccionados);
+    }
+
+    // Mostrar ingredientes seleccionados
+    document.getElementById('ingredientes_seleccionados').innerText = ingredientesSeleccionados.slice(0, 3).join(', ');
+    document.getElementById('ingredientes_extras').innerText = ingredientesSeleccionados.slice(3).join(', ');
+
+    // Actualizar el resumen del pedido
+    const totalElementos = document.querySelectorAll('.list-group-item');
+    totalElementos[0].querySelector('.der').innerText = `$${pizza.precio}`;
+    totalElementos[1].querySelector('.der').innerText = `$${pizza.calcularExtras()}`;
+    totalElementos[2].querySelector('.der').innerText = `$${pizza.propina}`;
+}
+
+// Manejar evento de ingresar propina
+document.querySelector('.btn-dark').addEventListener('click', function () {
+    const propinaInput = document.querySelector('.input-group-text').value;
+    const propina = propinaInput ? parseInt(propinaInput) : 1000;
+
+    // Actualizar la propina en la instancia de pizza
+    pizza.propina = propina;
+
+    // Calcular el total con la nueva propina
+    pizza.calcularTotal();
+
+    // Enviar alert con la descripción del pedido
     alert(`Pedido enviado. ${pizza.describir()}`);
 });
 
