@@ -1,9 +1,4 @@
 //Parte 1 Mejorar Pizza
-    //Definir la clase pizza con un array vacío
-    //Utilizar el valor de los radio button e ingresarlos en el array de ingredientes disponibles
-    //Crear una función de recorrer array para contar los ingredientes extras
-     
-
 // Definir clase Pedido
 class Pedido {
     constructor(total, propina = 1000) {
@@ -18,6 +13,8 @@ class Pedido {
 
 // Definir clase Pizza que extiende de Pedido
 class Pizza extends Pedido {
+     //Definir la clase pizza con un array vacío
+    //Crear una función de recorrer array para contar los ingredientes extras
     constructor(total, propina, precio = 15000, ingredientes = []) {
         super(total, propina);
         this.precio = precio;
@@ -32,25 +29,25 @@ class Pizza extends Pedido {
 
     calcularTotal() {
         const extras = this.calcularExtras();
-        this.total = this.precio + extras + this.propina;
-        return this.total;
+        this.total = this.precio + extras
+        return this.total + this.propina;
     }
 
     describir() {
         const extras = this.calcularExtras();
+        const total = this.calcularTotal();
         return `
-        Precio total: ${this.total}
+        Precio pizza XL: ${this.precio}
+        Ingredientes Extras: ${extras}
         Propina: ${this.propina} 
-        Precio: ${this.precio}`;
+        Precio total: ${total}`;
     }
 }
 
 //Parte 2 Resumen del pedido
-    //utilizar el valor por defecto en PIZZA XL
-    //Utilizar valor de ingredientes extras
-
 // Función para actualizar el resumen del pedido
 function actualizarResumen() {
+    //Utilizar valor de ingredientes extras
     const ingredientesSeleccionados = [];
     const checkboxes = document.querySelectorAll('.form-check-input');
 
@@ -62,7 +59,8 @@ function actualizarResumen() {
 
     const pizza = new Pizza(0, 1000, 15000, ingredientesSeleccionados);
 
-    // Mostrar ingredientes seleccionados
+    //Utilizar el valor de los radio button e ingresarlos en el array de ingredientes disponibles
+    // Mostrar ingredientes seleccionados, 
     document.getElementById('ingredientes_seleccionados').innerText = ingredientesSeleccionados.slice(0, 3).join(', ');
     document.getElementById('ingredientes_extras').innerText = ingredientesSeleccionados.slice(3).join(', ');
 
@@ -78,7 +76,8 @@ document.querySelector('.btn-dark').addEventListener('click', function () {
     const propinaInput = document.querySelector('.input-group-text').value;
      //utilizar el valor por defecto 1000 al seleccionar el input de propinas
     const propina = propinaInput ? parseInt(propinaInput) : 1000;
-    
+   
+    //utilizar el valor por defecto en PIZZA XL
     const pizza = new Pizza(0, propina, 15000, []);
     pizza.calcularTotal();
 

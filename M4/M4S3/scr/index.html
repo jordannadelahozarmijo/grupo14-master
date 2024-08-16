@@ -18,21 +18,22 @@
     </nav>
     <div class="container">
         <!--Jumbotron-->
-        <div class="mt-4 p-5 bg-danger text-white rounded">
-            <h1>Pizzeria</h1>
-            <p>Arma tu pizza a tu gusto</p>
+        <div class="mt-4 p-5 bg-danger text-white rounded jumbotron">
+            <h1 id="titleJumbotron">Ñami ñammiiiiii</h1>
+            <h5>Arma tu pizza a tu gusto</h5>
           </div>
         <!--Contenido-->
-        <div class="container text-center mt-3">
+        <div class="contenido text-center mt-3">
             <div class="row align-items-start">
                 <!--Primera Col-->
                 <div class="col-12 col-md-6">
                     <div>
-                        <h3 id="title">MEJORA TU PIZZA</h3>
-
-                        <P>Puede elegir 3 ingredientes gratis. cada ingrediente adicional cuesta $800 pesos cada uno.</P>
-                        <p>Los ingredientes seleccionados son:</p>
-
+                        <h4 id="title">MEJORA TU PIZZA</h4>
+                        <div class="col" id="textosDescriptivos">
+                            <h5>Puede elegir 3 ingredientes gratis.</h5>
+                            <h6>Cada ingrediente adicional cuesta $800 pesos cada uno.</h6>
+                            <p>Los ingredientes seleccionados son:</p>
+                        </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="Carne" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">Carne</label>
@@ -66,29 +67,32 @@
                             <label class="form-check-label" for="flexCheckChecked">Pimentón</label>
                         </div>
                     </div>
-                    <div class="row mt-5">
-                        <p>Los <strong> ingredientes seleccionados </strong> son:</p>
-                        <span id="ingredientes_seleccionados"></span>
+                    <div class="row mt-4">
+                        <p>Los ingredientes seleccionados son:</p>
+                        <p id="ingredientes_seleccionados"></p>
 
                         <p>Los ingredientes <strong>extras</strong> seleccionados son:</p>
-                        <span id="ingredientes_extras"></span>
+                        <p id="ingredientes_extras"></p>
                     </div>
                     
 
                 </div>
                 <!--Segunda Col-->
                 <div class="col-12 col-md-6">
-                    <div id="title2">
-                        <h4>RESUMEN DEL PEDIDO</h4>
-                    </div>
+                    <h4 id="title2">RESUMEN DEL PEDIDO</h4>
+                  
                     <ul class="list-group">
                         <li class="list-group-item"><p class="izq">Pizza XL</p> <strong><p class="der"></p></strong></li>
                         <li class="list-group-item"><p class="izq">Ingredientes Extras</p> <strong><p class="der"></p></strong></li>
                         <li class="list-group-item"><p class="izq">Propina</p> <strong><p class="der"></p></strong></li>
                     </ul>
-                    <div class="row" id="input-gru">
-                        <input class="input-group-text" type="number"> 
-                        <button class="btn btn-dark">Enviar Pedido con Propina</button>
+                    <div class="row" id="input-group">
+                        <div class="col">
+                            <input class="input-group-text col-12" type="number" placeholder="Ingresa propina">
+                        </div> 
+                        <div class="col">
+                            <button class="btn btn-dark col-12">Enviar Pedido con Propina</button>
+                        </div> 
                     </div>
                 </div>
             </div>
