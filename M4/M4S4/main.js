@@ -78,20 +78,20 @@ console.log('----------OPERADOR SPREAD----------');
     //Opción 1: permitiéndonos tomar un elemento "condensado" como una matriz o un objeto, y solo usar dicho elemento por sus partes individuales,
     const suma = (x, y, z) => x + y + z;
     let numeros = [7, 8, 9]
-    // Manera ES5:
-    console.log(suma.apply(null, numeros)); //24
-    // Manera ES6 con Spread:
-    console.log(suma(...numeros));
+        // Manera ES5:
+        console.log(suma.apply(null, numeros)); //24
+        // Manera ES6 con Spread:
+        console.log(suma(...numeros));
 
     //Opción 2: Concatenar valores
     var a = [1, 2, 3, 4, 5]
     var b = [6, 7, 8, 9, 10]
-    // Manera ES5:
-    console.log(a.concat(b)) // [1,2,3,4,5,6,7,8,9,10]
-    // Manera ES6 con Spread:
-    console.log([...a, ...b]);
+        // Manera ES5:
+        console.log(a.concat(b)) // [1,2,3,4,5,6,7,8,9,10]
+        // Manera ES6 con Spread:
+        console.log([...a, ...b]);
 
     //Opción 3 Mostrar valores 
     let numeros_2 = [7, 8, 9]
-    // Manera ES6 con Spread:
-    console.log([...numeros_2]);
+        // Manera ES6 con Spread:
+        console.log([...numeros_2]);
