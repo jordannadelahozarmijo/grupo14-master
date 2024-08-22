@@ -16,7 +16,7 @@
         */
     
     // Ejercicio 2 aplicar métodos .then y catch ----------------------------------
-        //Configurar promesa:
+        //Configurar promesa con 2 parámetros
         let Promesa2 = new Promise(function(miResolucion, miRechazo) {
                 setTimeout(function() {
                         //promesa en true o false
@@ -32,7 +32,7 @@
             }
         );
 
-        //Método .then
+        //Método .then, se utiliza para manejar el resultado exitoso de una promesa
             Promesa2.then(function(value) { 
                 //En caso de cumplirse la promesa muestra en pantalla el valor
                 document.getElementById("d1").innerHTML = value;
@@ -44,7 +44,7 @@
             );
 
 
-        //Método .catch
+        //Método .catch, manejar cualquier error que ocurra en la cadena de promesas
             Promesa2.catch(function(value) {
                 console.log(value)
                 })
@@ -87,7 +87,8 @@
                 });
             }
 
-        /* Definimos funcion async y utilizamos await en la constante para mostrar el resultado. Solo se puede un usar el operador await dentro de una función async.
+        // Definimos funcion async y utilizamos await en la constante para mostrar el resultado. 
+        // El operador await solo se puede usar dentro de una función async.
             async function llamadaAsync() {
                     console.log('--INICIANDO--');
 
@@ -102,7 +103,6 @@
                     console.log('--FINALIZANDO--');
             }
             llamadaAsync();
-        */
 
 //Probando ejemplos
             //Definir promesa
