@@ -21,13 +21,19 @@ http.createServer (async (req,res) => {
         const archivoOriginal = await fs.readFile('comics.txt');
         const datosOriginales = JSON.parse(archivoOriginal);
         const id = uuidv4();
+        let datosComic;
 
         req.on('data', (data) => {
-            const datosComic = JSON.parse(data);
+            datosComic = JSON.parse(data);
             console.log(datosComic);
-        }
-        
-        ) 
+        })
+
+        req.on('end', async () => {
+            datosOriginales[id] = datosComic;
+            await fs.writeFile('comics.txt', JSON.stringify(datosOriginales, null,2));
+            res.write("Comic agregado exitozamente");
+            res.end()
+        })
     }
 
     if(pathname == '/comics' && req.method == 'PUT'){
@@ -41,7 +47,7 @@ http.createServer (async (req,res) => {
 
 
 
-.listen(3000, function(){
-    console.log("Servidor iniciado en puerto 3000");
+.listen(8000, function(){
+    console.log("Servidor iniciado en puerto 8000");
 }); 
 
