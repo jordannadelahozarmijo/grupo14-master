@@ -1,0 +1,32 @@
+[
+  {
+    "id": "100",
+    "titulo": "Pulgarcito",
+    "autor": "Charles Perrault"
+  },
+  {
+    "id": "66caed43",
+    "titulo": "la vuelta al mundo",
+    "autor": "julio verne"
+  },
+  {
+    "id": "17a035ff",
+    "titulo": "Donde surgen las sombras",
+    "autor": "David Lozano"
+  },
+  {
+    "id": "47731ff4",
+    "titulo": "cocina chilena",
+    "autor": "Álvaro Barrientos"
+  },
+  {
+    "id": "82af8ee9",
+    "titulo": "cocina argentina",
+    "autor": "Gastón Riveira"
+  },
+  {
+    "id": "653462e6",
+    "titulo": "ABC",
+    "autor": "DFG"
+  }
+]
