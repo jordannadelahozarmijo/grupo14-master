@@ -16,5 +16,11 @@
     "autor": "Stan Lee",
     "issn": "43214321",
     "cantidad": 100
+  },
+  "68b019db-8e8e-43a8-a17e-55ce05d177cb": {
+    "titulo": "Marvel",
+    "autor": "Stan Lee",
+    "issn": "43214321",
+    "cantidad": 100
   }
 }
