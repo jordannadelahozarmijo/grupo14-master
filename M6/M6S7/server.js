@@ -40,9 +40,38 @@ http.createServer (async (req,res) => {
     }
 
     if(pathname == '/comics' && req.method == 'PUT'){
+        const id = params.get('id');
+        const datosArchivo = await fs.readFile('comics.txt');
+        const objetoArchivoOriginal = JSON.parse(datosArchivo);
+        let datosParaModificar;
+        req.on('data',(datos)=>{
+            datosParaModificar = JSON.parse(datos);
+        })
+        req.on('end',async ()=>{
+            const comicOriginal = objetoArchivoOriginal[id]
+            const comicActualizado = {...comicOriginal, ...datosParaModificar}
+
+            objetoArchivoOriginal[id] = comicActualizado;
+
+            await fs.writeFile('comics.txt', JSON.stringify(objetoArchivoOriginal, null, 2));
+
+            res.write("Los datos han sido modificados exitosamente");
+            res.end();
+        })
     }
 
     if(pathname == '/comics' && req.method == 'DELETE'){
+        const comicsOriginales = await fs.readFile('comics.txt');
+        const objetoComicsOriginal = JSON.parse(comicsOriginales);
+        const id = params.get('id');
+        delete objetoComicsOriginal[id];
+
+        await fs.writeFile('comics.txt', JSON.stringify(objetoComicsOriginal, null, 2));
+
+
+
+        res.write("El comic ha sido eliminado exitosamente");
+        res.end();
     }
 
 
