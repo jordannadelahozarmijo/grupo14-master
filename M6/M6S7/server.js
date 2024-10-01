@@ -12,7 +12,7 @@ http.createServer (async (req,res) => {
     const params = new URLSearchParams(searchParams);
     console.log(pathname)
 
-    if(pathname == '/comics' && req.method == 'GET'){
+    if(pathname == '/comics' && req.method == 'GET'){   
         //Leer archivo
         const leerArchivo = await fs.readFile('comics.txt');
         res.write(leerArchivo);
