@@ -25,4 +25,5 @@ cliente.query('SELECT * FROM usuarios', (err, res) => {
     console.log(res.rows)
     cliente.end() // Cerrando la conexión
     }
+    
 })
