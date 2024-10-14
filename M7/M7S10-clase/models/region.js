@@ -1,7 +1,6 @@
 'use strict';
 const {
-  Model,
-  ForeignKeyConstraintError
+  Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Region extends Model {
@@ -11,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Region.hasmMany(models.Provincia,{
+      Region.hasMany(models.Provincia,{
         foreignKey: 'regionId',
-        as:'provincias',
-       })
+        as: 'provincias'
+      })
     }
   }
   Region.init({

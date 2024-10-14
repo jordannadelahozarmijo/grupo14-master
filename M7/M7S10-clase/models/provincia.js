@@ -10,20 +10,21 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Provincia.hasmMany(models.Ciudad,{
-        foreignKey: 'provinciaId',
-        as:'ciudades',
-       });
+      Provincia.hasMany(models.Ciudad,{
+        foreignKey:'provinciaId',
+        as:'ciudades'
+      });
 
-       Provincia.belongsTo(models.Region,{
+      Provincia.belongsTo(models.Region, {
         foreignKey: 'regionId',
-        as:'regiones',
-       })
+        as: 'regiones'
+      });
+
     }
   }
   Provincia.init({
     nombre: DataTypes.STRING,
-    regionID: DataTypes.INTEGER
+    regionId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Provincia',
