@@ -1,0 +1,8 @@
+
+
+Calles.belongsToMany(models.Ciudades, {
+    through: 'ciudades', //Hace referencia al nombre de la tabla intermedia
+    foreignKey: 'CiudadId',
+    otherKey: 'callesId',
+    as: 'calles'
+  });

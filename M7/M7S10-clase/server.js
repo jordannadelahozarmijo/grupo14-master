@@ -12,5 +12,5 @@ app.post('/regiones', async (req, res) => {
 
 
 app.listen(port, () => {
-    console.log ('El servidor está corriendo en el puerto' ${port});
+    console.log ('El servidor está corriendo en el puerto' + '${port}');
 })
