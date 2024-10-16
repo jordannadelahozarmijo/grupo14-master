@@ -1,0 +1,15 @@
+[
+    {
+        "id": 101,
+        "content": "Estamos investigando el problema.",
+        "created_at": "2024-10-16T13:00:00Z",
+        "id_ticket":1
+    },
+    {
+        "id": 102,
+        "content": "Hemos identificado el problema, se resolverá pronto.",
+        "created_at": "2024-10-16T14:00:00Z",
+        "id_ticket":1
+
+    }
+]

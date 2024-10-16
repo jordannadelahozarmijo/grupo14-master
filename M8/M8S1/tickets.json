@@ -1,0 +1,27 @@
+[    
+    {
+        "id": 1,
+        "subject": "Problema con la red móvil",
+        "description": "No tengo servicio de datos móviles en mi zona.",
+        "status": "open",
+        "created_at": "2024-10-16T12:00:00Z",
+        "updated_at": "2024-10-16T14:00:00Z"
+      
+    },
+    {
+        "id": 2,
+        "subject": "Problema con la red móvil",
+        "description": "No tengo servicio de datos móviles en mi zona.",
+        "status": "open",
+        "created_at": "2024-10-16T12:00:00Z",
+        "updated_at": "2024-10-16T14:00:00Z"  
+    },
+    {
+        "id": 3,
+        "subject": "Problema con la red móvil",
+        "description": "No tengo servicio de datos móviles en mi zona.",
+        "status": "open",
+        "created_at": "2024-10-16T12:00:00Z",
+        "updated_at": "2024-10-16T14:00:00Z"
+    }
+]
