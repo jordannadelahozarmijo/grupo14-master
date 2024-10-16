@@ -1,213 +1,238 @@
-//Importar módulos
+// Importar módulos
 const http = require('http');
-const fs = require ('fs/promises');
-const {v4: uuidv4} = require ('uuid');
+const fs = require('fs/promises');
+const { v4: uuidv4 } = require('uuid');
 
-//Crear servidor
-const servidor = http.createServer (async (req,res) => {
-    const { searchParams, pathname} = new URL(req.url, `https://${req.headers.host}`);
+// Crear servidor
+const servidor = http.createServer(async (req, res) => {
+    const { searchParams, pathname } = new URL(req.url, `http://${req.headers.host}`);
     const params = new URLSearchParams(searchParams);
-    console.log(pathname)
-    
-    //get Tickets
-    if(pathname == '/tickets' && req.method == 'GET'){
-        //Leer archivo
-        try{
-            const Archivo = await fs.readFile('tickets.json');
+    // Obtener Tickets
+    if (pathname == '/tickets' && req.method == 'GET') {
+        try {
+            const archivo = await fs.readFile('tickets.json');
             res.statusCode = 200;
-            res.write(Archivo);
-            res.end('OK');
+            res.setHeader('Content-Type', 'application/json');
+            res.end(archivo);
+        } catch (error) {
+            res.statusCode = 500;
+            res.end('Error al leer el archivo de tickets');
+        }
+    };
+
+    // get ticket por id
+    if(pathname.startsWith('/tickets/') && req.method == 'GET'){
+        const id = pathname.split('/')[2];  // Extraer el ID desde la URL
+        try {
+            const archivoOriginal = await fs.readFile('tickets.json');
+            const tickets = JSON.parse(archivoOriginal);
+
+            const ticket = tickets.find(ticket => ticket.id == id);
+            if (ticket) {
+                res.statusCode = 200;
+                res.write(JSON.stringify(ticket, null, 2));
+            } else {
+                res.statusCode = 404;
+                res.write('Ticket no encontrado');
+            }
+            res.end();
         }
         catch (error) {
             res.statusCode = 500;
             res.end('Error al leer el archivo');
         }
-  
     }
-
     
-    //post Tickets
-    if(pathname == '/tickets' && req.method == 'POST'){
+
+    // Crear nuevo Ticket
+    if (pathname == '/tickets' && req.method == 'POST') {
         try {
             const archivoOriginal = await fs.readFile('tickets.json');
             const datosOriginales = JSON.parse(archivoOriginal);
-            const id = uuidv4();
-            let datostickets;
+            let nuevoTicket;
 
             req.on('data', (data) => {
-                datostickets = JSON.parse(data);
-                console.log(datostickets);
+                nuevoTicket = JSON.parse(data);
             });
 
             req.on('end', async () => {
-                datosOriginales[id] = datostickets;
-                await fs.writeFile('tickets.json', JSON.stringify(datosOriginales, null,2));
-                res.statusCode = 200;
-                res.write("tickets agregado exitosamente");
-                res.end()
+                const nuevoId = datosOriginales.length + 1; // Usar un ID numérico consecutivo
+                nuevoTicket.id = nuevoId;
+                nuevoTicket.created_at = new Date().toISOString();
+                nuevoTicket.updated_at = new Date().toISOString();
+                datosOriginales.push(nuevoTicket);
+
+                await fs.writeFile('tickets.json', JSON.stringify(datosOriginales, null, 2));
+                res.statusCode = 201;
+                res.end('Ticket agregado exitosamente');
             });
-        }
-        catch (error) {
+        } catch (error) {
             res.statusCode = 500;
-            res.end('Error al agregar el tickets');
+            res.end('Error al agregar el ticket');
         }
     }
 
-    //put tickets
-    if(pathname == '/tickets' && req.method == 'PUT'){
+    // Actualizar un Ticket
+    if (pathname == '/tickets' && req.method == 'PUT') {
         try {
-            const id = params.get('id');
+            const id = parseInt(params.get('id'));
             const archivoOriginal = await fs.readFile('tickets.json');
             const objetosOriginales = JSON.parse(archivoOriginal);
             let datosParaModificar;
-            
+
             req.on('data', (datos) => {
                 datosParaModificar = JSON.parse(datos);
-            })
+            });
 
             req.on('end', async () => {
-                const ticketsOriginal = objetosOriginales[id]
-                const ticketsActualizado = {...ticketsOriginal, ...datosParaModificar}
+                const index = objetosOriginales.findIndex(ticket => ticket.id === id);
+                if (index === -1) {
+                    res.statusCode = 404;
+                    res.end('Ticket no encontrado');
+                    return;
+                }
 
-                objetosOriginales[id] = ticketsActualizado;
-                await fs.writeFile('tickets.json', JSON.stringify(objetosOriginales, null,2));
+                // Actualizar el ticket y mantener los valores antiguos donde no se modifica
+                objetosOriginales[index] = { ...objetosOriginales[index], ...datosParaModificar, updated_at: new Date().toISOString() };
+
+                await fs.writeFile('tickets.json', JSON.stringify(objetosOriginales, null, 2));
                 res.statusCode = 200;
-                res.write("Los datos han sido actualizados de forma exitosa");
-                res.end();
-            })
-        }
-        catch (error) {
+                res.end('Ticket actualizado exitosamente');
+            });
+        } catch (error) {
             res.statusCode = 500;
-            res.end('Error al agregar el tickets');
+            res.end('Error al actualizar el ticket');
         }
     }
 
-    //delete tickets
-    if(pathname == '/tickets' && req.method == 'DELETE'){
+    // Eliminar un Ticket
+    if (pathname == '/tickets' && req.method == 'DELETE') {
         try {
-        const archivoOriginal = await fs.readFile('tickets.json');
-        const objetosOriginales = JSON.parse(archivoOriginal);
-        const id = params.get('id');
-        if (!objetosOriginales[id]) {
-            res.statusCode = 404;
-            res.end("tickets no encontrado");
-        }
+            const id = parseInt(params.get('id'));
+            const archivoOriginal = await fs.readFile('tickets.json');
+            const objetosOriginales = JSON.parse(archivoOriginal);
 
-        delete objetosOriginales[id];
-        await fs.writeFile('tickets.json', JSON.stringify(objetosOriginales, null, 2));
-        res.statusCode = 200;
-        res.write("Los datos han sido eliminados exitosamente");
-        res.end('Ok');
-        }
-        catch {
-            res.statusCode = 500;
-            res.end('Error al eliminar el tickets');
-        }
+            const index = objetosOriginales.findIndex(ticket => ticket.id === id);
+            if (index === -1) {
+                res.statusCode = 404;
+                res.end('Ticket no encontrado');
+                return;
+            }
 
-    }
-    
-    //get Messages
-    if(pathname == '/messages' && req.method == 'GET'){
-        //Leer archivo
-        try{
-            const Archivo = await fs.readFile('messages.json');
+            objetosOriginales.splice(index, 1);
+            await fs.writeFile('tickets.json', JSON.stringify(objetosOriginales, null, 2));
             res.statusCode = 200;
-            res.write(Archivo);
-            res.end('OK');
-        }
-        catch (error) {
+            res.end('Ticket eliminado exitosamente');
+        } catch (error) {
             res.statusCode = 500;
-            res.end('Error al leer el archivo');
+            res.end('Error al eliminar el ticket');
         }
-  
     }
-    //post Messages
-    if(pathname == '/messages' && req.method == 'POST'){
+
+    // Obtener mensajes de un ticket específico
+    if (pathname.startsWith('/tickets/') && pathname.endsWith('/messages') && req.method == 'GET') {
+        const id_ticket = parseInt(pathname.split('/')[2]);
+        try {
+            const archivoMessages = await fs.readFile('messages.json');
+            const messages = JSON.parse(archivoMessages);
+
+            // Filtrar los mensajes del ticket específico
+            const messagesForTicket = messages.filter(message => message.id_ticket === id_ticket);
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(messagesForTicket));
+        } catch (error) {
+            res.statusCode = 500;
+            res.end('Error al leer los mensajes');
+        }
+    }
+
+    // Crear nuevo Mensaje
+    if (pathname == '/messages' && req.method == 'POST') {
         try {
             const archivoOriginal = await fs.readFile('messages.json');
             const datosOriginales = JSON.parse(archivoOriginal);
-            const id = uuidv4();
-            let datosmessages;
+            let nuevoMensaje;
 
             req.on('data', (data) => {
-                datosmessages = JSON.parse(data);
-                console.log(datosmessages);
+                nuevoMensaje = JSON.parse(data);
             });
 
             req.on('end', async () => {
-                datosOriginales[id] = datosmessages;
-                await fs.writeFile('messages.json', JSON.stringify(datosOriginales, null,2));
-                res.statusCode = 200;
-                res.write("messages agregado exitosamente");
-                res.end()
+                nuevoMensaje.id = datosOriginales.length + 1; // Generar un nuevo ID numérico
+                nuevoMensaje.created_at = new Date().toISOString();
+
+                datosOriginales.push(nuevoMensaje);
+                await fs.writeFile('messages.json', JSON.stringify(datosOriginales, null, 2));
+                res.statusCode = 201;
+                res.end('Mensaje agregado exitosamente');
             });
-        }
-        catch (error) {
+        } catch (error) {
             res.statusCode = 500;
-            res.end('Error al agregar el messages');
+            res.end('Error al agregar el mensaje');
         }
     }
 
-    //put messages
-    if(pathname == '/messages' && req.method == 'PUT'){
+
+    // Actualizar un Mensaje
+    if (pathname == '/messages' && req.method == 'PUT') {
         try {
-            const id = params.get('id');
+            const id = parseInt(params.get('id'));
             const archivoOriginal = await fs.readFile('messages.json');
             const objetosOriginales = JSON.parse(archivoOriginal);
             let datosParaModificar;
-            
+
             req.on('data', (datos) => {
                 datosParaModificar = JSON.parse(datos);
-            })
+            });
 
             req.on('end', async () => {
-                const messagesOriginal = objetosOriginales[id]
-                const messagesActualizado = {...messagesOriginal, ...datosParaModificar}
+                const index = objetosOriginales.findIndex(message => message.id === id);
+                if (index === -1) {
+                    res.statusCode = 404;
+                    res.end('Mensaje no encontrado');
+                    return;
+                }
 
-                objetosOriginales[id] = messagesActualizado;
-                await fs.writeFile('messages.json', JSON.stringify(objetosOriginales, null,2));
+                // Actualizar el mensaje
+                objetosOriginales[index] = { ...objetosOriginales[index], ...datosParaModificar };
+
+                await fs.writeFile('messages.json', JSON.stringify(objetosOriginales, null, 2));
                 res.statusCode = 200;
-                res.write("Los datos han sido actualizados de forma exitosa");
-                res.end();
-            })
-        }
-        catch (error) {
+                res.end('Mensaje actualizado exitosamente');
+            });
+        } catch (error) {
             res.statusCode = 500;
-            res.end('Error al agregar el message');
+            res.end('Error al actualizar el mensaje');
         }
     }
-    //delete messages
-    if(pathname == '/messages' && req.method == 'DELETE'){
+
+    // Eliminar un Mensaje
+    if (pathname == '/messages' && req.method == 'DELETE') {
         try {
-        const archivoOriginal = await fs.readFile('messages.json');
-        const objetosOriginales = JSON.parse(archivoOriginal);
-        const id = params.get('id');
-        if (!objetosOriginales[id]) {
-            res.statusCode = 404;
-            res.end("messages no encontrado");
-        }
+            const id = parseInt(params.get('id'));
+            const archivoOriginal = await fs.readFile('messages.json');
+            const objetosOriginales = JSON.parse(archivoOriginal);
 
-        delete objetosOriginales[id];
-        await fs.writeFile('messages.json', JSON.stringify(objetosOriginales, null, 2));
-        res.statusCode = 200;
-        res.write("Los datos han sido eliminados exitosamente");
-        res.end('Ok');
-        }
-        catch {
+            const index = objetosOriginales.findIndex(message => message.id === id);
+            if (index === -1) {
+                res.statusCode = 404;
+                res.end('Mensaje no encontrado');
+                return;
+            }
+
+            objetosOriginales.splice(index, 1);
+            await fs.writeFile('messages.json', JSON.stringify(objetosOriginales, null, 2));
+            res.statusCode = 200;
+            res.end('Mensaje eliminado exitosamente');
+        } catch (error) {
             res.statusCode = 500;
-            res.end('Error al eliminar el messages');
+            res.end('Error al eliminar el mensaje');
         }
+    }});
 
-    }
-
+servidor.listen(9090, function () {
+    console.log("Servidor iniciado en puerto 9090");
 });
 
-
-servidor.listen(9090, function(){
-    console.log("Servidor iniciado en puerto 9090");
-}); 
-
-module.exports = {servidor};
-
-//Para consultar en postman utlizar esta url
-// localhost:9090/tickets
+module.exports = { servidor };

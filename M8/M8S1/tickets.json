@@ -23,5 +23,13 @@
         "status": "open",
         "created_at": "2024-10-16T12:00:00Z",
         "updated_at": "2024-10-16T14:00:00Z"
+    },
+    {
+        "id": 4,
+        "subject": "Aplicación no funciona",
+        "description": "No tengo servicio de datos móviles en mi zona.",
+        "status": "close",
+        "created_at": "2024-10-12T12:00:00Z",
+        "updated_at": "2024-10-12T14:00:00Z"
     }
 ]
