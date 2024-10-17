@@ -53,7 +53,7 @@ app.get('/jugadores/:id', async (req, res) => {
         const jugadores = await leerArchivo('./jugadores.json');
         
         // Compara el ID como una cadena
-        const jugador = jugadores.find(u => u.id === parseInt(req.params.id)); // No uses parseInt si el ID es string
+        const jugador = jugadores.find(u => u.id === (req.params.id)); // No uses parseInt si el ID es string
         
         if (!jugador) {
             return res.status(404).json({ mensaje: 'Jugador no encontrado' });
@@ -97,7 +97,7 @@ app.put('/jugadores/:id', async (req, res) => {
         const { id } = req.params;
         const { nombre = 'Jugador desconocido', posicion = 'Entrenamiento' } = req.body;
         const jugadores = await leerArchivo('./jugadores.json');
-        const jugador = jugadores.findIndex(u => u.id === parseInt(req.params.id)); 
+        const jugador = jugadores.findIndex(u => u.id === (req.params.id)); 
 
         if  (jugador === -1) {
             return res.status(404).json({ mensaje: 'Jugador no encontrado' });

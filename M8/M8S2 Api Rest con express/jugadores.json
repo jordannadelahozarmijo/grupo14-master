@@ -1,27 +1,22 @@
 [
   {
-    "id": 1,
-    "nombre": "Juanito Feliz",
-    "posicion": "Entrenamiento"
-  },
-  {
-    "id": 2,
-    "nombre": "Pablo Alvarez",
-    "posicion": "Defensor"
-  },
-  {
-    "id": 3,
-    "nombre": "Daniel Jara",
+    "id": "3e2b7afa-c362-4597-b962-18449630ea3b",
+    "nombre": "Juanito Perez",
     "posicion": "Arquero"
   },
   {
-    "id": 4,
-    "nombre": "Cristian Lopez",
+    "id": "359a0364-4cf4-44dc-953d-eb5c60d2006e",
+    "nombre": "Pelao Suazo",
     "posicion": "Delantero"
   },
   {
-    "id": "3e2b7afa-c362-4597-b962-18449630ea3b",
-    "nombre": "Juanito Perez",
+    "id": "16204635-38d2-4ed1-8c54-2e41a77b9c81",
+    "nombre": "Lionel Messi",
+    "posicion": "Delantero"
+  },
+  {
+    "id": "1a6cba46-f4e2-4619-bba4-6973ab37adbd",
+    "nombre": "Claudio Bravo",
     "posicion": "Arquero"
   }
 ]
