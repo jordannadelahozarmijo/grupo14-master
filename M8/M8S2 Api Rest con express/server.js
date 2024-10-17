@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require ('cors');
-const fs = require ('fs');
+const fs = require('fs').promises;
 const { v4: uuidv4 } = require ('uuid');
 const app = express();
 const port = 3000;
@@ -12,27 +12,27 @@ app.use(express.json());
 
 
 //llamar el archivo de jugadores.json para utilizarlo y leerlo
+// Función para leer el archivo jugadores.json
 const leerArchivo = async (file) => {
     try {
-        const jugadoresFile = file;
-        const jugadores = await JSON.parse(fs.readFileSync(jugadoresFile, 'utf8'));
-        return jugadores;
+        const data = await fs.readFile(file, 'utf8');
+        return JSON.parse(data); // Parseamos y retornamos los datos
     } catch (error) {
         console.error('Error al leer el archivo:', error);
-        return null;  // o cualquier manejo de error que prefieras
+        throw error; // Lanzamos el error para manejarlo más adelante
     }
 };
 
 
-const escribirArchivo = (file, data, callback) => {
-    fs.writeFile(file, JSON.stringify(data, null, 2), 'utf8', (err) => {
-        if (err) {
-            console.error('Error al escribir en el archivo:', err);
-            return callback(err); // Si hay error, llamamos al callback con el error
-        }
+// Función para escribir en el archivo jugadores.json
+const escribirArchivo = async (file, data) => {
+    try {
+        await fs.writeFile(file, JSON.stringify(data, null, 2), 'utf8');
         console.log('Archivo escrito correctamente');
-        callback(null); // Llama al callback indicando que todo salió bien
-    });
+    } catch (error) {
+        console.error('Error al escribir en el archivo:', error);
+        throw error; // Lanzamos el error para manejarlo más adelante
+    }
 };
 
 
@@ -66,14 +66,12 @@ app.get('/jugadores/:id', async (req, res) => {
 });
 
 
-app.post('/jugadores', (req, res) => {
+app.post('/jugadores', async (req, res) => {
     const { nombre = 'Jugador desconocido', posicion = 'Entrenamiento' } = req.body;
 
-    leerArchivo('./jugadores.json', (err, jugadores) => {
-        if (err) {
-            return res.status(500).json({ mensaje: 'Error al leer el archivo de jugadores' });
-        }
-        
+    try {
+        const jugadores = await leerArchivo('./jugadores.json'); // Leemos el archivo
+
         const id = uuidv4(); // Genera un nuevo id usando uuidv4()
         
         const nuevoJugador = {
@@ -82,15 +80,15 @@ app.post('/jugadores', (req, res) => {
             posicion
         };
 
-        jugadores.push(nuevoJugador); // Agrega el nuevo jugador
+        jugadores.push(nuevoJugador); // Agregamos el nuevo jugador
 
-        escribirArchivo('./jugadores.json', jugadores, (err) => {
-            if (err) {
-                return res.status(500).json({ mensaje: 'Error al escribir en el archivo de jugadores' });
-            }
-            res.status(201).json({ mensaje: 'Jugador agregado exitosamente', nuevoJugador });
-        });
-    });
+        await escribirArchivo('./jugadores.json', jugadores); // Escribimos el archivo
+
+        // Respondemos al cliente con el nuevo jugador
+        res.status(201).json({ mensaje: 'Jugador agregado exitosamente', nuevoJugador });
+    } catch (err) {
+        return res.status(500).json({ mensaje: 'Error al procesar la solicitud' });
+    }
 });
 
 
