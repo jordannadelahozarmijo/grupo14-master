@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "nombre": "Matias Gonzalez",
+    "posicion": "Delantero"
+  },
+  {
+    "id": 2,
+    "nombre": "Pablo Alvarez",
+    "posicion": "Defensor"
+  },
+  {
+    "id": 3,
+    "nombre": "Daniel Jara",
+    "posicion": "Arquero"
+  },
+  {
+    "id": 4,
+    "nombre": "Cristian Lopez",
+    "posicion": "Delantero"
+  }
+]
