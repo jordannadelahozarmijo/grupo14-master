@@ -91,6 +91,51 @@ app.post('/jugadores', async (req, res) => {
     }
 });
 
+//Crear el PUT
+app.put('/jugadores/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nombre = 'Jugador desconocido', posicion = 'Entrenamiento' } = req.body;
+        const jugadores = await leerArchivo('./jugadores.json');
+        const jugador = jugadores.findIndex(u => u.id === parseInt(req.params.id)); 
+
+        if  (jugador === -1) {
+            return res.status(404).json({ mensaje: 'Jugador no encontrado' });
+        }
+        if (nombre) jugadores[jugador].nombre = nombre;
+        if (posicion) jugadores[jugador].posicion = posicion;
+        await escribirArchivo('./jugadores.json', jugadores);
+        res.json({mensaje :  'Jugador actualizado exitosamente', jugador: jugadores[jugador]});
+
+    }  catch (error) {
+        res.status(500).json({ mensaje: 'Error al actualizar el jugador', error });
+    }
+});
+
+
+//Crear el DELETE
+app.delete('/jugadores/:id', async (req, res) => {
+    const { id } = req.params; // Obtenemos el ID del jugador de los parámetros
+ 
+    try {
+        const jugadores = await leerArchivo('./jugadores.json'); // Leemos el archivo
+ 
+        const jugadorIndex = jugadores.findIndex(jugador => jugador.id === id); // Buscamos el jugador por ID
+ 
+        if (jugadorIndex === -1) {
+            return res.status(404).json({ mensaje: 'Jugador no encontrado' }); // Si no lo encontramos, respondemos con 404
+        }
+ 
+        jugadores.splice(jugadorIndex, 1); // Eliminamos el jugador del arreglo
+ 
+        await escribirArchivo('./jugadores.json', jugadores); // Escribimos el archivo actualizado
+ 
+        res.json({ mensaje: 'Jugador eliminado exitosamente' }); // Respondemos que se eliminó con éxito
+    } catch (err) {
+        return res.status(500).json({ mensaje: 'Error al procesar la solicitud' });
+    }
+});
+
 
 //Correr servidor
 
