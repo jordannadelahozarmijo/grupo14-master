@@ -1,0 +1,15 @@
+body {
+    background-color: #f8f9fa; /* Color de fondo claro */
+}
+
+.container {
+    margin-top: 50px; /* Espaciado superior */
+}
+
+.card {
+    margin: 15px; /* Espaciado entre las cards */
+}
+
+.alert {
+    margin-top: 20px; /* Espaciado superior para las alertas */
+}
