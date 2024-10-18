@@ -44,7 +44,11 @@ app.get('/jugadores', async (req,res)=> {
     } 
     catch (error) {
         console.error(error);
-        res.status(500).json({message: 'Error al leer el archivo json'});
+        res.status(500).json({
+            error: true,
+            codigo:  500,
+            message: 'Error al leer el archivo json'
+        });
     }       
 });
 
@@ -56,12 +60,20 @@ app.get('/jugadores/:id', async (req, res) => {
         const jugador = jugadores.find(u => u.id === (req.params.id)); // No uses parseInt si el ID es string
         
         if (!jugador) {
-            return res.status(404).json({ mensaje: 'Jugador no encontrado' });
+            return res.status(404).json({ 
+                error: true,
+                codigo:  404, 
+                mensaje: 'Jugador no encontrado' 
+            });
         }
         res.json(jugador);
     } 
     catch (error) {
-        res.status(500).json({ mensaje: 'Error al obtener el jugador', error });
+        res.status(500).json({ 
+            error:  true,
+            codigo: 500,
+            mensaje: 'Error al obtener el jugador'
+        });
     }
 });
 
@@ -85,9 +97,16 @@ app.post('/jugadores', async (req, res) => {
         await escribirArchivo('./jugadores.json', jugadores); // Escribimos el archivo
 
         // Respondemos al cliente con el nuevo jugador
-        res.status(201).json({ mensaje: 'Jugador agregado exitosamente', nuevoJugador });
+        res.status(201).json({
+            error:  false,
+            codigo:  201,
+            mensaje: 'Jugador agregado exitosamente', nuevoJugador 
+        });
     } catch (err) {
-        return res.status(500).json({ mensaje: 'Error al procesar la solicitud' });
+        return res.status(500).json({ 
+            error: true,
+            codigo: 500,
+            mensaje: 'Error al procesar la solicitud' });
     }
 });
 
@@ -100,15 +119,27 @@ app.put('/jugadores/:id', async (req, res) => {
         const jugador = jugadores.findIndex(u => u.id === (req.params.id)); 
 
         if  (jugador === -1) {
-            return res.status(404).json({ mensaje: 'Jugador no encontrado' });
+            return res.status(404).json({ 
+                error: true, 
+                codigo:  404,
+                mensaje: 'Jugador no encontrado' 
+            });
         }
         if (nombre) jugadores[jugador].nombre = nombre;
         if (posicion) jugadores[jugador].posicion = posicion;
         await escribirArchivo('./jugadores.json', jugadores);
-        res.json({mensaje :  'Jugador actualizado exitosamente', jugador: jugadores[jugador]});
+        res.json({
+            error:  false,
+            codigo:  200,
+            mensaje :  'Jugador actualizado exitosamente', jugador: jugadores[jugador]
+        });
 
     }  catch (error) {
-        res.status(500).json({ mensaje: 'Error al actualizar el jugador', error });
+        res.status(500).json({
+            error: true,
+            codigo: 500,
+            mensaje: 'Error al actualizar el jugador', error 
+        });
     }
 });
 
@@ -123,7 +154,10 @@ app.delete('/jugadores/:id', async (req, res) => {
         const jugadorIndex = jugadores.findIndex(jugador => jugador.id === id); // Buscamos el jugador por ID
  
         if (jugadorIndex === -1) {
-            return res.status(404).json({ mensaje: 'Jugador no encontrado' }); // Si no lo encontramos, respondemos con 404
+            return res.status(404).json({ 
+                error: true,
+                codigo:  404, 
+                mensaje: 'Jugador no encontrado' }); // Si no lo encontramos, respondemos con 404
         }
  
         jugadores.splice(jugadorIndex, 1); // Eliminamos el jugador del arreglo
@@ -132,18 +166,27 @@ app.delete('/jugadores/:id', async (req, res) => {
  
         res.json({ mensaje: 'Jugador eliminado exitosamente' }); // Respondemos que se eliminó con éxito
     } catch (err) {
-        return res.status(500).json({ mensaje: 'Error al procesar la solicitud' });
+        return res.status(500).json({ 
+            error: true,
+            codigo: 500,
+            mensaje: 'Error al procesar la solicitud' });
     }
 });
 
 // Middleware de respuestas para error 404 (URL no encontrada)
 app.use((req, res) => {
-    res.status(404).send({ error: true, codigo: 404, mensaje: 'URL no encontrada' });
+    res.status(404).send({ 
+        error: true, 
+        codigo: 404, 
+        mensaje: 'URL no encontrada' });
 });
 
 // Middleware de respuestas para error 500 (Error interno del servidor)
 app.use((err, req, res, next) => {
-    res.status(500).send({ error: true, codigo: 500, mensaje: 'Error interno del servidor' });
+    res.status(500).send({ 
+        error: true, 
+        codigo: 500, 
+        mensaje: 'Error interno del servidor' });
 });
 
 
