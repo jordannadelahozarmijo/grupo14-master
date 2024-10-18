@@ -136,6 +136,16 @@ app.delete('/jugadores/:id', async (req, res) => {
     }
 });
 
+// Middleware de respuestas para error 404 (URL no encontrada)
+app.use((req, res) => {
+    res.status(404).send({ error: true, codigo: 404, mensaje: 'URL no encontrada' });
+});
+
+// Middleware de respuestas para error 500 (Error interno del servidor)
+app.use((err, req, res, next) => {
+    res.status(500).send({ error: true, codigo: 500, mensaje: 'Error interno del servidor' });
+});
+
 
 //Correr servidor
 
