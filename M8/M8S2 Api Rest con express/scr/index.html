@@ -8,22 +8,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Inconsolata:wght@200..900&family=New+Amsterdam&display=swap" rel="stylesheet">
-    <title>CRUD Jugadores</title>
+    <title>Jugadores</title>
 </head>
 <body>
+
     <div class="container mt-5">
-        <h1>CRUD Jugadores</h1>
-        <button class="btn btn-success" id="create-btn">Agregar Jugador</button>
-        <button class="btn btn-primary" id="read-btn">Leer Jugadores</button>
-        <button class="btn btn-secondary" id="update-btn">Actualizar Jugador</button>
-        <button class="btn btn-danger" id="delete-btn">Eliminar Jugador</button>
-        
-        <h2>Lista de Jugadores</h2>
-        <pre id="jugadores-list"></pre>
+        <h1 class="">Jugadores</h1>
+            <div class="wrapper">
+                <button class="btn btn-success col-md-3" id="create-btn">Agregar Jugador</button>
+                <button class="btn btn-primary col-md-3" id="read-btn">Leer Jugadores</button>
+                <button class="btn btn-secondary col-md-3" id="update-btn">Actualizar Jugador</button>
+                <button class="btn btn-danger col-md-3" id="delete-btn">Eliminar Jugador</button>
+            </div>
+        </div>
+        <div class="row">
+            <h2 class="mt-5">Lista de Jugadores</h2>
+            <pre id="jugadores-list"></pre>
+        </div>
     </div>
 
     
-
+    <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>

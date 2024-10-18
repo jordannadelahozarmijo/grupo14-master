@@ -13,3 +13,7 @@ body {
 .alert {
     margin-top: 20px; /* Espaciado superior para las alertas */
 }
+
+.wrapper {
+    display: grid;
+}
