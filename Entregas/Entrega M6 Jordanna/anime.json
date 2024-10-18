@@ -1,0 +1,56 @@
+{
+  "1": {
+    "nombre": "One Piece",
+    "genero": "Shonen",
+    "año": "1999",
+    "autor": "Eiichiro Oda"
+  },
+  "2": {
+    "nombre": "Death Note",
+    "genero": "Thriller",
+    "año": "2006",
+    "autor": "Tsugumi Ohba"
+  },
+  "3": {
+    "nombre": "Sailor Moon",
+    "genero": "Shojo",
+    "año": "1992",
+    "autor": "Naoko Takeuchi"
+  },
+  "4": {
+    "nombre": "Naruto",
+    "genero": "Shonen",
+    "año": "2002",
+    "autor": "Masashi Kishimoto"
+  },
+  "5": {
+    "nombre": "Neon Genesis Evangelion",
+    "genero": "Mecha",
+    "año": "1995",
+    "autor": "Yoshiyuki Sadamoto"
+  },
+  "50c220f8-edbd-4ea3-8446-0c89122e7f8f": {
+    "nombre": "Lovely★Complex (Love★Com)",
+    "genero": "Romance, Comedia",
+    "año": 2007,
+    "autor": "Aya Nakahara"
+  },
+  "1787e63d-9093-44ff-b74f-0a0dd34cebb6": {
+    "nombre": "Akira",
+    "genero": "Seinen",
+    "año": "1988",
+    "autor": "Katsuhiro Otomo"
+  },
+  "5ed3b2e1-e981-4531-b574-db54c4bd02cd": {
+    "nombre": "Akira",
+    "genero": "Seinen",
+    "año": "1988",
+    "autor": "Katsuhiro Otomo"
+  },
+  "ed125f4b-c34d-4643-9f5d-59a331c5d5a9": {
+    "nombre": "Akira",
+    "genero": "Seinen",
+    "año": "1988",
+    "autor": "Katsuhiro Otomo"
+  }
+}
