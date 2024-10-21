@@ -55,7 +55,7 @@ app.get('/libros', async (req, res) => {
 //------------------------------------------------------------------------------------
 
 // Ruta para agregar libros (POST)
-app.post('/libros', (req, res) => {
+app.post('/libros', async (req, res) => {
     const { isbn, nombre, autor } = req.body;
 
     // Verificamos si todos los datos requeridos están presentes
@@ -82,19 +82,31 @@ app.post('/libros', (req, res) => {
     const nuevoLibro = { isbn, nombre, autor };
     listaLibros.push(nuevoLibro);
 
-    // Enviamos respuesta
-    res.status(201).send({
-        error: false,
-        codigo: 201,
-        mensaje: 'El libro fue agregado correctamente',
-        respuesta: listaLibros,
-    });
+    try {
+        // Guardamos los cambios en el archivo libros.json de forma asíncrona
+        await fs.writeFile("./libros.json", JSON.stringify(listaLibros, null, 2));
+
+        // Enviamos respuesta exitosa
+        res.status(201).send({
+            error: false,
+            codigo: 201,
+            mensaje: 'El libro fue agregado correctamente',
+            respuesta: listaLibros,
+        });
+    } catch (err) {
+        // En caso de error, enviamos respuesta de error
+        res.status(500).send({
+            error: true,
+            codigo: 500,
+            mensaje: 'Error al guardar el archivo',
+        });
+    }
 });
 
 //------------------------------------------------------------------------------------
 
 // Ruta para actualizar libros (PUT)
-app.put('/libros/:isbn', (req, res) => {
+app.put('/libros/:isbn', async (req, res) => {
     const { isbn } = req.params; // Obtenemos el isbn de los parámetros
     const libroActualizado = req.body; // Obtenemos los datos actualizados del body
 
@@ -110,13 +122,25 @@ app.put('/libros/:isbn', (req, res) => {
     // Actualizamos las propiedades del libro encontrado
     listaLibros[indice] = { ...listaLibros[indice], ...libroActualizado };
 
-    // Enviamos respuesta
-    return res.status(200).send({
-        error: false,
-        codigo: 200,
-        mensaje: 'El libro fue actualizado correctamente',
-        respuesta: listaLibros,
-    });
+    try {
+        // Guardamos los cambios en el archivo libros.json de forma asíncrona
+        await fs.writeFile("./libros.json", JSON.stringify(listaLibros, null, 2));
+
+        // Enviamos respuesta
+        return res.status(200).send({
+            error: false,
+            codigo: 200,
+            mensaje: 'El libro fue actualizado correctamente',
+            respuesta: listaLibros,
+        });
+    } catch (err) {
+        // En caso de error, enviamos respuesta de error
+        return res.status(500).send({
+            error: true,
+            codigo: 500,
+            mensaje: 'Error al guardar los cambios en el archivo',
+        });
+    }
 });
 
 //------------------------------------------------------------------------------------

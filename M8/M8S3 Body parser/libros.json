@@ -1,7 +1,12 @@
 [
-    {
-        "isbn": 1,
-        "nombre": "El diario de Ana Frank",
-        "autor": "Ana Frank"
-    }
+  {
+    "isbn": "1",
+    "nombre": "El diario de Ana Frank",
+    "autor": "Ana Frank"
+  },
+  {
+    "isbn": "2",
+    "nombre": "El diario de juan",
+    "autor": "juan"
+  }
 ]
