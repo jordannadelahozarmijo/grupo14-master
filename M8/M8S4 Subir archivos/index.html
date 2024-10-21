@@ -15,10 +15,10 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Selecciona un archivo para cargar</h5>
-                <form>
+                <form action="/upload" method="post">
                     <div class="mb-3">
                         <label for="fileInput" class="form-label">Archivo</label>
-                        <input class="form-control" type="file" id="fileInput">
+                        <input class="form-control" type="file" id="fileInput" name="fileInput" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Subir</button>
                 </form>
