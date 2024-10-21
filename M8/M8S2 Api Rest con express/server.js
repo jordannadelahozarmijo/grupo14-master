@@ -191,7 +191,6 @@ app.use((err, req, res, next) => {
 
 
 //Correr servidor
-
 app.listen(port, () => {
     console.log(`Servidor está corriendo en el puerto ${port}`);
 });

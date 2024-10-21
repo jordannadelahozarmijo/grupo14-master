@@ -1,0 +1,32 @@
+[
+  {
+    "id": "0474ec65-af74-42e8-84f9-5161de9c6e8e",
+    "sku": "001",
+    "numeroFactura": "1001"
+  },
+  {
+    "id": "0ca332f9-e74a-4791-89dc-0aa6bb7e50ad",
+    "sku": "002",
+    "numeroFactura": "1002"
+  },
+  {
+    "id": "27b1c3c3-2f65-4791-9b02-937762e6b2f0",
+    "sku": "003",
+    "numeroFactura": "1003"
+  },
+  {
+    "id": "1f092c33-d69a-45cf-b84b-8343614c14ba",
+    "sku": "004",
+    "numeroFactura": "1004"
+  },
+  {
+    "id": "ba145365-f4b2-4d76-ba01-5f80bb0b69da",
+    "sku": "005",
+    "numeroFactura": "1005"
+  },
+  {
+    "id": "0c960ed1-87ab-4742-9232-8eff06a02ec1",
+    "sku": "006",
+    "numeroFactura": "1006"
+  }
+]

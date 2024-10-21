@@ -1,0 +1,20 @@
+[
+  {
+    "id": "199da670-127a-4cec-bb27-9b01ca982a92",
+    "nombre": "Computador",
+    "precio": 5000,
+    "cantidad": 50
+  },
+  {
+    "id": "d968345c-484a-4ae1-9620-caf65826612e",
+    "nombre": "Teclado",
+    "precio": 1000,
+    "cantidad": 50
+  },
+  {
+    "id": "ab28a4ac-ceaa-422c-b06f-a6d8a1826732",
+    "nombre": "airpods",
+    "precio": "20000",
+    "cantidad": "10"
+  }
+]
