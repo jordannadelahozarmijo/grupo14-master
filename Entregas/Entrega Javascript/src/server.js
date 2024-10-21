@@ -2,13 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs').promises;
 const { v4: uuidv4 } = require('uuid');
-
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(express.json()); 
+app.use(express.static('public'));
 
+app.get('/', async (req, res) => {
+    res.sendFile(path.join(__dirname, 'public',  'index.html'));
+});
+
+//---------------------------------------------------------------------------------
 //Función para leer los archivos json
 const leerArchivo = async (file) => {
     try {
@@ -41,6 +46,7 @@ const eliminarArchivo = async (file, data) => {
         throw error;
     }
 };
+
 
 //---------------------------------------------------------------------------------
 // Rutas para gestionar ventas
