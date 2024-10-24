@@ -4,6 +4,7 @@ const path = require('path');
 const jwt = require ('jsonwebtoken');
 const fs = require('fs');
 const baseUrl = "http://localhost:4000/files/";
+const cookieParser = require ('cookie-parser');
 const secretKey = "secret";
 
 const PORT = 4000; // Definimos el puerto donde la API estará disponible
@@ -12,49 +13,70 @@ const PORT = 4000; // Definimos el puerto donde la API estará disponible
 const app = express();
 app.use(fileUpload());
 app.use(express.json()); // Para que la API pueda recibir datos en formato JSON
+app.use(cookieParser());
 app.use(express.static('public'));
+
+
+const usuarios = [
+    { id: 1, nombre: 'admin', contrasena: '123456', rol: 'admin' },
+    { id: 2, nombre: 'usuario', contrasena: 'password', rol: 'usuario' }
+];
+
 
 //Crear endpoint para verificar con jwt 
 app.post("/login", (req, res) => {
-    try {
-      const username = req.body.username;
-      const password = req.body.password;
-      if (!username || !password) {
-        return res.status(400).json({ message: "Username y password son requeridos" });
-      }
-      if (username === "admin" && password === "123") {
-        //Generar token
-        const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
-        //configurar, enviar token en la cookie del cliente
-        return res.status(200).json({ token });
-      } else {
-        return res.status(401).json({ message: "Autentificaicón falló" });
-      }
-    } catch (error) {
-      return res.status(500).json({ message: "Error interno de servidor" });
+    const { nombre, contrasena } = req.body;
+    //Verificar si el usuario existe y la contraseña es correcta
+    const usuario = usuarios.find(u => u.nombre === nombre && u.contrasena === contrasena);
+
+    if (!usuario) {
+        return res.status(401).json({
+            error: true,
+            codigo: 401,
+            mensaje: 'Credenciales inválidas' 
+        });
     }
-  });
-  //Se valida el token
-  function verifyToken(req, res, next) {
-    //Obtiene el valor del encabezado HTTP Autorización de la solicitud.
-    const header = req.header("Authorization") || "";
-    const token = header.split(" ")[1];
+    //Crear el payload del token JWT
+    const payload = {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        rol: usuario.rol
+    };
+
+    //Generar el token JWT
+    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
+
+    //Guardar el token en una cookie del navegador
+    res.cookie('token', token, { httpOnly: true });
+    res.json({ 
+        mensaje: 'Inicio de sesión exitoso, token generado',
+        token: token
+    });
+    });
+
+  //Middleware para verificar el token
+function verifyToken(req, res, next) {
+    const token = req.cookies?.token;
     if (!token) {
-      return res.status(401).json({ message: "Token no entregado" });
+      return res.status(403).json({ mensaje: 'No se encontró el token, acceso denegado' });
     }
-    try {
-      const payload = jwt.verify(token, secretKey);
-      // extrae el username para que sea utilizado por otros controladores
-      req.username = payload.username;
+  
+    jwt.verify(token, secretKey, (err, usuario) => {
+      if (err) {
+        return res.status(403).json({ mensaje: 'Token inválido o expirado' });
+      }
+      //Si el token es válido, guardamos la información del usuario en la request
+      req.usuario = usuario;
       next();
-    } catch (error) {
-      return res.status(403).json({ message: "Token no válido" });
-    }
+    });
   }
 
-//método get utiliza el middelware para dar acceso
+//endpoint get utiliza el middelware para dar acceso
 app.get("/protected", verifyToken, (req, res) => {
-return res.status(200).json({ message: "Acceso exitoso" });
+    if (req.usuario.rol !== 'admin') {
+      return res.status(403).json({ mensaje: 'No tienes permisos de administrador' });
+    }
+    res.json({ mensaje: `Bienvenido a la página de administración, ${req.usuario.nombre}` });
 });
 
 
