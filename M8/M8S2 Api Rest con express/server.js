@@ -55,9 +55,11 @@ app.get('/jugadores', async (req,res)=> {
 app.get('/jugadores/:id', async (req, res) => {
     try {
         const jugadores = await leerArchivo('./jugadores.json');
+        const id = req.params.id;
+        const jugador = jugadores.find((jugador) => jugador.id === (id));
         
         // Compara el ID como una cadena
-        const jugador = jugadores.find(u => u.id === (req.params.id)); // No uses parseInt si el ID es string
+        //const jugador = jugadores.find(u => u.id === (params.id)); // No uses parseInt si el ID es string
         
         if (!jugador) {
             return res.status(404).json({ 
@@ -192,5 +194,5 @@ app.use((err, req, res, next) => {
 
 //Correr servidor
 app.listen(port, () => {
-    console.log(`Servidor está corriendo en el puerto ${port}`);
+    console.log(`Servidor está corriendo en el puerto http://localhost:${port}/jugadores`);
 });
